@@ -15,10 +15,20 @@ CALLBACK_URL = 'http://www.oucena.com/' # callback url
 client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
 client.set_access_token('2.00manU9D01NniH10e6012bafqOoA4D',1359960034)
 
-shanghai = tweepy.api.get_user('CGShanghaiAir')
-beijing = tweepy.api.get_user('BeijingAir')
-chengdu = tweepy.api.get_user('CGChengduAir')
-guangzhou = tweepy.api.get_user('Guangzhou_Air')
+
+consumer_key = 'ymHb0VVPRGX8e6afmPBvyQ'
+consumer_secret = 'VLKvFg1hkrI8Hu2N3ENpYh4hfL8YABjQ5L8QvSA'
+access_token='75552666-26gnjg4BbyS1VqVkdIMnIXiHtbud614kitTlkeM2e'
+access_token_secret = 'epbWhd52MeK34eVHfbOGnM09q6Kf8oWlAibI6D5ZFQU'
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+
+api = tweepy.API(auth)
+
+shanghai = api.get_user('CGShanghaiAir')
+beijing =api.get_user('BeijingAir')
+chengdu = api.get_user('CGChengduAir')
+guangzhou = api.get_user('Guangzhou_Air')
 
 air_location = {
                 'shanghai':shanghai,
