@@ -6,6 +6,8 @@ import tweepy
 import time
 from weibo import APIClient
 from datetime import datetime
+from BeautifulSoup import BeautifulSoup
+import requests
 
 con = MongoClient('localhost',27017)
 db = con.air.pm
@@ -58,11 +60,16 @@ def parserdata(tweet,place):
             #client.statuses.update.post(status=u'%s 的在 %s 的新数据 PM2.5=%s '%(place,publish_time,data))
         else:
             print '>>>>>>>>>not found %s new data'%place
-        
+
+def get_shanghai_air_pic():
+    html = requests.get("http://www.semc.gov.cn/aqi/home/Index.aspx")
+    soup = BeautifulSoup(html)
+    pass
          
     
 for place in air_location:
     tweet = air_location[place].timeline()[0]
     parserdata(tweet,place)
     time.sleep(2)
+
 
