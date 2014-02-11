@@ -72,3 +72,4 @@ for place in air_location:
     parserdata(tweet,place)
     time.sleep(2)
 
+
