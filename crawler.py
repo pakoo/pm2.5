@@ -7,6 +7,7 @@ import time
 from weibo import APIClient
 from datetime import datetime
 from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup as bs4,Tag
 import requests
 
 con = MongoClient('localhost',27017)
@@ -47,7 +48,7 @@ def parserdata(tweet,place):
     print 'text:',tweet.text
     text = tweet.text.split(';')
     if len(text) >=3:
-        publish_time,data = text[0],text[2]
+        publish_time,data = text[0],text[3]
         res = db.find_one({'location':place,'create_time':create_time}) 
         if not res:
             print ">>>>>>>>发现一条 %s %s 的在 %s 的新数据 PM2.5=%s "%(place,str(create_time),data,publish_time)
