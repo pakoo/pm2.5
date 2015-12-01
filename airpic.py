@@ -10,6 +10,7 @@ import time
 con = MongoClient('localhost',27017)
 
 db2 = con.air.pic
+db = con.air.pm
 
 air_location = {
                 'shanghai':340,
@@ -65,6 +66,8 @@ def get_city_live_pic(city_id,city_name):
                 'pic_list':res,
                 'city_name':city_name,
         })
+    pm = db.find({location:city_name},sort=[('create_time',-1)],limit=1)
+    print pm
 
 for k,v in air_location.items():
     get_city_live_pic(v,k)
