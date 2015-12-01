@@ -12,6 +12,7 @@ import requests
 
 con = MongoClient('localhost',27017)
 db = con.air.pm
+db2 = con.air.pic
 APP_KEY = '114109966' # app key 
 APP_SECRET = 'efcee5fbe1becdd6d88934eba3e23ba4' # app secret 
 CALLBACK_URL = 'http://www.oucena.com/' # callback url  
@@ -67,7 +68,47 @@ def get_shanghai_air_pic():
     soup = BeautifulSoup(html)
     pass
          
+def get_city_live_pic(city_id):
+
+    url = "http://ugc.moji001.com/sns/json/liveview/timeline/city"
     
+    headers = {
+    'Host':'ugc.moji001.com',
+    'Accept':'application/json, text/javascript, */*; q=0.01',
+    'Accept_Language':'zh-Hans-CN, en-us',
+    'Content-Type':'application/json; charset=utf-8',
+    'Referer':'http://www.loreal-boutique.com/',
+    'User-Agent':'%E5%A2%A8%E8%BF%B9%E5%A4%A9%E6%B0%94/5005070137 CFNetwork/758.1.6 Darwin/15.0.    0'
+    }
+    
+        
+    para ={
+            "common" : {
+            "unix" : "1448941933426.814",
+            "uid" : 662936431,
+            "app_version" : "50050701",
+            "mcc" : "460",
+            "width" : 640,
+            "net" : "wifi",
+            "mnc" : "01",
+            "identifier" : "0C9346AC-B971-4F5B-8CC8-DCB49938F84E",
+            "platform" : "iPhone",
+            "token" : "<4cd00fba 1dcd12e3 41061fa6 4aaeff32 961a90c5 1ed9d1b2 cd61ce9b e054045b>    ",
+            "language" : "CN",
+            "height" : 1136,
+            "os_version" : "9.1",
+            "device" : "iPhone",
+            "pid" : "9000"
+            },
+            "params" : {
+            "city_id" :str(city_id),
+            "page_past" : 0,
+            "page_length" : 30
+            }
+    }
+    r = requests.post(url,data=json.dumps(para),cookies=cookie,headers=headers)
+    res =  r.json()['picture_list']
+
 for place in air_location:
     tweet = air_location[place].timeline()[0]
     parserdata(tweet,place)
