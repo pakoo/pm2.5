@@ -66,8 +66,8 @@ def get_city_live_pic(city_id,city_name):
                 'pic_list':res,
                 'city_name':city_name,
         })
-    pm = db.find({location:city_name},sort=[('create_time',-1)],limit=1)
-    print pm
+    pm = db.find_one({'location':city_name},sort=[('create_time',-1)],limit=1)
+    db.update({'_id':pm['_id']},{'$set':{'cover':'http://ugc.moji001.com/images/sthumb/'+res[0]['path']}})
 
 for k,v in air_location.items():
     get_city_live_pic(v,k)
