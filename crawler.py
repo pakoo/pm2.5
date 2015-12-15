@@ -48,7 +48,8 @@ def parserdata(tweet,place):
     create_time = tweet.created_at
     print 'text:',tweet.text
     text = tweet.text.split(';')
-    if len(text) >=3:
+    if len(text) >=4:
+        print 'text:',text
         publish_time,data = text[0],text[3]
         res = db.find_one({'location':place,'create_time':create_time}) 
         if not res:

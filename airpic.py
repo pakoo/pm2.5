@@ -55,7 +55,7 @@ def get_city_live_pic(city_id,city_name):
             "params" : {
             "city_id" :str(city_id),
             "page_past" : 0,
-            "page_length" : 30
+            "page_length" : 15
             }
     }
     r = requests.post(url,data=json.dumps(para),headers=headers)
