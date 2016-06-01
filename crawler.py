@@ -50,7 +50,7 @@ def parserdata(tweet,place):
     text = tweet.text.split(';')
     if len(text) >=4:
         print 'text:',text
-        publish_time,data = text[0],text[3]
+        publish_time,data = text[0],text[2]
         res = db.find_one({'location':place,'create_time':create_time}) 
         if not res:
             print ">>>>>>>>发现一条 %s %s 的在 %s 的新数据 PM2.5=%s "%(place,str(create_time),data,publish_time)
